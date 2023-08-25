@@ -54,6 +54,23 @@ function showEdit(idA){
     });
 }
 
+function search(){
+    let search = $("#search").val();
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+        },
+        url: "http://localhost:8080/accounts/search?username="+ search,
+        success: function (data) {
+           show(data);
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    });
+}
+
 function deleteA(idA){
     $.ajax({
         type: "GET",
