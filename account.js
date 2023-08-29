@@ -1,9 +1,12 @@
+let token = localStorage.getItem('token');
+
 function getAll() {
     // Tạo ra 1 request.
     $.ajax({
         type: "GET",
         headers: {
             'Accept': 'application/json',
+            "Authorization": "Bearer " + token
         },
         url: "http://localhost:8080/accounts",
         success: function (data) {
@@ -11,7 +14,6 @@ function getAll() {
         },
         error: function (err) {
             console.log(err)
-            // lỗi
         }
     });
 
@@ -40,6 +42,7 @@ function showEdit(idA){
         type: "GET",
         headers: {
             'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: "http://localhost:8080/accounts/"+idA,
         success: function (data) {
@@ -60,6 +63,7 @@ function search(){
         type: "GET",
         headers: {
             'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: "http://localhost:8080/accounts/search?username="+ search,
         success: function (data) {
@@ -74,7 +78,11 @@ function search(){
 function deleteA(idA){
     $.ajax({
         type: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: "http://localhost:8080/accounts/delete/"+idA,
+
         success: function (data) {
             getAll();
         },
@@ -95,7 +103,9 @@ function edit() {
     $.ajax({
         type: "Post",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+
         },
         url: "http://localhost:8080/accounts",
         data: JSON.stringify(account),

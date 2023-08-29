@@ -7,6 +7,7 @@ let products = [
 show();
 
 
+
 function show() {
     let str = "";
     for (const product of products) {
